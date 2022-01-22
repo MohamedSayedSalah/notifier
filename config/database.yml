@@ -1,0 +1,19 @@
+development: &default
+  adapter: postgresql
+  database: notifier_development
+  encoding: utf8
+  min_messages: warning
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+
+test:
+  <<: *default
+  database: notifier_test
+
+production:
+  <<: *default
+  database: notifier_production
+  username: notifier
+  password: <%= ENV['NOTIFIER_DATABASE_PASSWORD'] %>
+
+
