@@ -102,7 +102,7 @@ module.exports = {
         },
     },
     plugins: [
-        // require('@tailwindcss/forms'),
+        require('@tailwindcss/forms'),
         plugin(({ addBase, theme }) => {
             addBase({
                 a: {

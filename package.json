@@ -30,6 +30,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
+    "@tailwindcss/forms": "^0.4.0",
     "@webpack-cli/serve": "^1.6.0",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",

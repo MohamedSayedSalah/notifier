@@ -10,4 +10,17 @@ module ApplicationHelper
       { currentUser: nil, profilePath: nil, loginPath: login_path}
     end
   end
+
+  def user_props
+    {
+      loginUrl: session_path(resource),
+      # passwordResetUrl: password_path(resource_name),
+      # passwordUrl: password_path(resource_name),
+      # profileUrl: bikes_path,
+      registrationUrl: registration_path(resource),
+      rememberable: devise_mapping.rememberable?,
+      # role: sessions[:signup_role],
+      # rootUrl: "/",
+    }
+  end
 end

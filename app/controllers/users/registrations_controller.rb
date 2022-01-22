@@ -5,6 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def new
     super
+    redirect_to root_path
   end
 
 
