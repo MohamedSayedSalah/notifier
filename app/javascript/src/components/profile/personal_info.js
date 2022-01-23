@@ -66,6 +66,7 @@ export const PersonalInfo = ({user, submissionUrl}) => {
                     placeholder="Select Time Zone"
                     value={user.time_zone}
                     register={register}
+                    onChange={()=>{}}
                 />
 
                 <div>

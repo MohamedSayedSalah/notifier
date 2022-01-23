@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   post "/ticket", to: "tickets#create", as: :new_ticket
   get "/pending", to: "tickets#pending", as: :pending
+
   root "home#index"
+  match "*path", to: "home#index", via: :get
 
 end

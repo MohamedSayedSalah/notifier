@@ -5,4 +5,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :tickets
+  has_many :messages
+
+
+
+
+
+  def notifications_count
+    messages.processed.count
+  end
+
+
+
 end

@@ -12,13 +12,11 @@ class Users::ProfilesController < ApplicationController
     else
       render json: { errors: current_user.errors }
     end
-
   end
 
 
   private
 
-  # convert to utc before saving user localtime
   def profile_params
     params.require(:user).permit(:username, :due_date_reminder, :due_date_reminder_interval, :due_date_reminder_time, :time_zone)
   end

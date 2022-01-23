@@ -9,7 +9,12 @@ class UserBlueprint < Blueprinter::Base
   end
 
   view :profile do
-    fields  :username, :id, :email, :due_date_reminder, :due_date_reminder_interval, :due_date_reminder_time, :time_zone
+    fields :username, :id, :email, :due_date_reminder, :due_date_reminder_interval, :due_date_reminder_time, :time_zone
+
+    field :notifications_count  do |user, options|
+      user.notifications_count
+    end
+    association :messages, blueprint: MessageBlueprint
   end
 
 

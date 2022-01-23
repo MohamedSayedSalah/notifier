@@ -2,7 +2,8 @@ class DateVal
 
   FORMATS = {
     long:           '%-d %B, %Y',
-    long_with_time: '%-d %B, %Y %H:%M UTC %z Berlin'
+    long_with_time: '%-d %B, %Y %H:%M UTC %z Berlin',
+    time:  '%H:%M UTC %z'
   }
 
   def self.[](datetime)
