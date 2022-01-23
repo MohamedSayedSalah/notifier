@@ -45,7 +45,7 @@ export const PersonalInfo = ({user, submissionUrl}) => {
             onSubmit={handleSubmit(onSubmit)}
         >
 
-            <div className="bg-grey-50 w-1/2 left-1/4 mt-10 absolute shadow-xl rounded p-10">
+            <div className="bg-white w-1/2 left-1/4 top-16 absolute shadow-xl rounded p-10">
 
                 <div className="">
                     <label htmlFor="names" className="text-md text-gray-600">User name</label>
@@ -69,7 +69,7 @@ export const PersonalInfo = ({user, submissionUrl}) => {
                 />
 
                 <div>
-                    <label htmlFor="reminder_time" className="text-md text-gray-600">Reminder Time</label>
+                    <label htmlFor="reminder_time" className="text-md text-gray-600">Reminder Time (according to your time zone)</label>
                 </div>
                 <TimePicker time={time} setTime={setTime}/>
 

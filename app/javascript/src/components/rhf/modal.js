@@ -4,7 +4,7 @@ import {Select, DatePicker} from '@components/rhf'
 import {useForm} from "react-hook-form";
 import {axios} from '@helpers/axios'
 
-export const Modal = ({open, setOpen, users, submissionUrl}) => {
+export const Modal = ({open, setOpen, users, submissionUrl, addTicket}) => {
     const formRef = useRef(null)
     const [selected, setSelected] = useState(null)
     const [dueDate, setDueDate] = useState(new Date())
@@ -33,6 +33,7 @@ export const Modal = ({open, setOpen, users, submissionUrl}) => {
         axios.post(submissionUrl, {...data})
             .then((res) => {
                 setOpen(false)
+                addTicket(res.data.ticket)
             }).catch((e)=>{
                 alert(e)
         })

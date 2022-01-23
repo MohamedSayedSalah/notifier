@@ -4,6 +4,7 @@ class TicketsController < ApplicationController
     ticket  = Ticket.new(ticket_params)
     if ticket.valid?
       ticket.save
+      render json: { ticket: TicketBlueprint.render_as_hash(ticket.reload, view: :ticket) }
     else
       render json: { errors: ticket.errors }
     end
