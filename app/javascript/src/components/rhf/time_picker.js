@@ -18,8 +18,7 @@ export const TimePicker = ({time, setTime}) => {
     },[minutes, hours])
 
 
-
-    return <div className="mt-2 p-2 w-48 bg-white rounded ">
+    return <div className="mb-5  p-2 w-48 bg-white  border-2 border-gray-300 rounded-md ">
         <div className="flex">
             <select name="hours" style={{border: 'none'}}
                     className="w-18 bg-transparent text-lg appearance-none outline-none" value={hours}

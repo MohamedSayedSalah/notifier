@@ -5,6 +5,8 @@ import { Button } from './button'
 import {CheckboxGroup} from "./checkbox_group";
 import {SubmitButtons} from "./submit_buttons";
 import {TimePicker} from "./time_picker";
+import {Modal} from "./modal";
+import {DatePicker} from "./date_picker";
 
 export {
     Input,
@@ -13,5 +15,7 @@ export {
     Button,
     CheckboxGroup,
     SubmitButtons,
-    TimePicker
+    TimePicker,
+    Modal,
+    DatePicker
 }

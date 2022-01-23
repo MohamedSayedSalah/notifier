@@ -9,9 +9,11 @@ import "channels"
 
 import { Footer } from '@components/navigation/footer'
 import { Home } from "@apps/home.js"
+import { Pending } from "@apps/pending.js"
 import { MainNavigation } from '@components/navigation/main_navigation'
 import SignUpLogin from '@apps/signup_login'
 import ProfileSettings from "@apps/profile_settings";
+
 
 require('@rails/ujs').start()
 require('@rails/activestorage').start()
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ProfileSettings,
         MainNavigation,
         // BikesParent,
-        // UsersParent,
+        Pending,
         Home,
         Footer
     })

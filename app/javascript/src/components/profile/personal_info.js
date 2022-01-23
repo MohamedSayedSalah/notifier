@@ -1,29 +1,25 @@
 import {
-    Input,
     SubmitButtons,
-    TimePicker
+    TimePicker,
+    Select
 } from '@components/rhf'
 
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useRef, useState} from 'react'
 import {ForumContainer} from '@containers/forum_container'
 import {useForm} from 'react-hook-form'
-import {useHistory} from 'react-router-dom'
 import {axios} from '@helpers/axios'
 import {time_zones} from '@helpers/time_zones'
-import {Select} from "../rhf";
+
 
 export const PersonalInfo = ({user, submissionUrl}) => {
 
     const [reminder, setReminder] = useState(user?.due_date_reminder)
     const [time, setTime] = useState(user?.due_date_reminder_time)
-    const [timeZone, setTimeZone] = useState({})
 
-    const history = useHistory()
+
     const {
-        clearErrors,
         handleSubmit,
         register,
-        setError,
         setValue,
         formState: {errors},
     } = useForm()
@@ -33,18 +29,14 @@ export const PersonalInfo = ({user, submissionUrl}) => {
     const onSubmit = (data) => {
         data.user.due_date_reminder = reminder
         data.user.due_date_reminder_time = time
-        data.user.time_zone = timeZone.value
         axios.patch(submissionUrl, {...data, page: 'personal_info'})
             .then((res) => {
 
-            })
+            }).catch((e) => {
+            alert(e)
+        })
     }
 
-
-
-    useEffect(()=>{
-       setTimeZone({value: user?.time_zone, label: user?.time_zone})
-    },[])
 
     return (
         <ForumContainer
@@ -55,53 +47,35 @@ export const PersonalInfo = ({user, submissionUrl}) => {
 
             <div className="bg-grey-50 w-1/2 left-1/4 mt-10 absolute shadow-xl rounded p-10">
 
-                <div className={"flex pt-10 relative flex"}>
-                    <div className={"w-1/4"}><span className={"mr-2 text-lg absolute top-1/2 "}> username  </span>
-                    </div>
-                    <Input
-                        clearErrors={clearErrors}
-                        defaultValue={user?.username}
-                        errorName="username"
-                        errors={errors}
-                        label=""
-                        name="user[username]"
-                        placeholder="Username"
-                        register={register}
-                    />
+                <div className="">
+                    <label htmlFor="names" className="text-md text-gray-600">User name</label>
+                </div>
+                <div className="">
+                    <input type="text" id="name" autoComplete="off" name="user[username]"
+                           className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                           {...register("user[username]")}
+                           defaultValue={user.username}
+                           placeholder="Example. John Doe"/>
                 </div>
 
-                <div className={"flex pt-10 relative flex"}>
-                    <div className={"w-1/4"}>
-                        <span className={"mr-2 text-lg absolute top-1/2 "}> Time Zone  </span>
-                    </div>
-                    <Select
-                        clearErrors={clearErrors}
-                        defaultValue={{value: user?.time_zone, label:user?.time_zone}}
-                        errorName="time_zon"
-                        errors={errors}
-                        identifier="time_zone"
-                        label=""
-                        name="user[time_zone]"
-                        onChange={(e) => setTimeZone(e)}
-                        options={time_zones.map((t) => {
-                            return {label: t, value: t}
-                        })}
-                        placeholder="Select Time Zone"
-                        setValue={setValue}
-                        value={timeZone}
-                    />
-                </div>
-                <div className={"flex pt-10 relative flex"}>
-                    <div className={"w-1/4"}><span
-                        className={"mr-2 text-lg absolute top-1/2 "}> Reminder Interval  </span>
-                    </div>
-                    <TimePicker time={time} setTime={setTime}/>
-                </div>
 
-                <div className={"flex pt-10 relative flex"}>
-                    <div className={"w-1/4"}><span
-                        className={"mr-2 text-lg absolute top-1/2 "}> Send Reminder  ? </span>
-                    </div>
+                <Select
+                    label="Time Zone"
+                    name="user[time_zone]"
+                    options={time_zones}
+                    placeholder="Select Time Zone"
+                    value={user.time_zone}
+                    register={register}
+                />
+
+                <div>
+                    <label htmlFor="reminder_time" className="text-md text-gray-600">Reminder Time</label>
+                </div>
+                <TimePicker time={time} setTime={setTime}/>
+
+
+                <div className={"flex mb-5"}>
+                    <label htmlFor="send_reminder" className="text-md text-gray-600 mr-2">Send Reminder</label>
                     <input
                         defaultChecked={user?.due_date_reminder}
                         value={user?.due_date_reminder}
@@ -117,25 +91,18 @@ export const PersonalInfo = ({user, submissionUrl}) => {
                 </div>
 
 
-                <div className={"flex pt-10 relative flex"}>
-                    <div className={"w-1/4"}><span className={"mr-2 text-lg absolute top-1/2 "}> Time Interval  </span>
-                    </div>
-                    <Input
-                        clearErrors={clearErrors}
-                        defaultValue={user?.due_date_reminder_interval}
-                        errorName="due_date_reminder_interval"
-                        errors={errors}
-                        label=""
-                        name="user[due_date_reminder_interval]"
-                        type={'number'}
-                        register={register}
-                        className={'w-14 rounded '}
-                    />
+                <div>
+                    <label htmlFor="reminder_time" className="text-md text-gray-600">Time Interval</label>
                 </div>
+
+                <input type="number" id="name" autoComplete="off" name="user[due_date_reminder_interval]"
+                       className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                       defaultValue={user.due_date_reminder_interval}
+                       {...register("user[due_date_reminder_interval]")}
+                />
 
                 <SubmitButtons
                     handleSubmit={handleSubmit}
-                    // next={user?.role === 'admin' && user.done ? {type: 'push', url: 'settings'} : ''}
                     nextText={'Save'}
                     onSubmit={onSubmit}
                     className={"absolute right"}

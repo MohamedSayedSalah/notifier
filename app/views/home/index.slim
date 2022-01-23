@@ -1,2 +1,2 @@
 - if current_user.present?
-div(react-component="Home" react-props={user: UserBlueprint.render_as_hash(current_user, view: :profile)}.to_json)
+div(react-component="Home" react-props={user: UserBlueprint.render_as_hash(current_user, view: :profile), users: @users, submissionUrl: new_ticket_path}.to_json)
