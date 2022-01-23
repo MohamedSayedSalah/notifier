@@ -2,7 +2,7 @@ module ApplicationHelper
   def main_navigation_props
     if current_user
       { currentUser: UserBlueprint.render_as_hash(current_user, view: :profile),
-        # usersPath: users_path,
+        profile_path: profile_path(current_user.id),
         # bikesPath: bikes_path,
         # loginPath: login_path
       }
@@ -16,7 +16,7 @@ module ApplicationHelper
       loginUrl: session_path(resource),
       # passwordResetUrl: password_path(resource_name),
       # passwordUrl: password_path(resource_name),
-      # profileUrl: bikes_path,
+      profileUrl: profile_path,
       registrationUrl: registration_path(resource),
       rememberable: devise_mapping.rememberable?,
       # role: sessions[:signup_role],

@@ -9,7 +9,7 @@ class UserBlueprint < Blueprinter::Base
   end
 
   view :profile do
-    fields  :username, :id, :email
+    fields  :username, :id, :email, :due_date_reminder, :due_date_reminder_interval, :due_date_reminder_time, :time_zone
   end
 
 

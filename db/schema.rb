@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_22_232014) do
+ActiveRecord::Schema.define(version: 2022_01_23_053625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_01_22_232014) do
   create_table "users", force: :cascade do |t|
     t.string "email", limit: 255
     t.string "username", limit: 255
-    t.boolean "send_due_date_reminder"
+    t.boolean "due_date_reminder", default: true
     t.integer "due_date_reminder_interval"
     t.datetime "due_date_reminder_time"
     t.string "time_zone", limit: 60

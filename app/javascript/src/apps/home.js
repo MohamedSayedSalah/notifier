@@ -4,7 +4,6 @@ import React from 'react'
 export const Home = (props)=>{
     return <div className={'relative min-h-screen bg-gray-100'}>
         <div className={'absolute w-full'}>
-
         </div>
     </div>
 }
