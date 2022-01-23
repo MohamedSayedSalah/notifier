@@ -29,6 +29,9 @@ gem 'devise'
 gem 'react-rails'
 gem "blueprinter" # json serialization
 gem "slim"
+gem 'net-smtp', require: false
+gem 'delayed_job_active_record'
+gem "mjml-rails", "~> 4.6.1" # Use mjml templates for responsive emails
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

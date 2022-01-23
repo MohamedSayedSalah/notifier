@@ -1,0 +1,25 @@
+<mj-section mj-class="white">
+  <mj-column mj-class="white">
+    <mj-text mj-class="topTitle" height="12px">Hi <%= @username %>,</mj-text>
+    <mj-text mj-class="topTitle" padding-top="10px">There is a new Ticket for you <%= %Q["#{@ticket_title}"] %>.</mj-text>
+  </mj-column>
+</mj-section>
+
+<mj-section mj-class="white" text-align="left">
+  <mj-column mj-class="white" width="20%">
+      <mj-image mj-class='user-image' src="<%= asset_path('/default-user-lg.png') %>"></mj-image>
+  </mj-column>
+  <mj-column mj-class="white">
+    <mj-text mj-class="text message-sender"><%= @username %></mj-text>
+  </mj-column>
+</mj-section>
+<mj-section mj-class="white" padding-top="10px">
+  <mj-column mj-class="white">
+    <mj-text mj-class="text"><%= @ticket.description %></mj-text>
+  </mj-column>
+</mj-section>
+<mj-section mj-class="white">
+  <mj-column mj-class="white">
+    <mj-button align='center' href="<%= %>" mj-class="cta">View</mj-button>
+  </mj-column>
+</mj-section>
