@@ -32,10 +32,11 @@ export const Modal = ({open, setOpen, users, submissionUrl, addTicket}) => {
         }
         axios.post(submissionUrl, {...data})
             .then((res) => {
-                setOpen(false)
                 addTicket(res.data.ticket)
             }).catch((e)=>{
                 alert(e)
+        }).finally(()=>{
+            setOpen(false)
         })
     }
 

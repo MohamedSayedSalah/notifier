@@ -12,6 +12,7 @@ const SignUpLogin = (props) => {
                 <BrowserRouter>
                     <Switch>
                         <Route path="/login" render={() => <Login {...props} />} />
+                        <Route path="/users/sign_in" render={() => <Login {...props} />} />
                         <Route path="/signup" render={() => <SignUp {...props} />} />
                     </Switch>
                 </BrowserRouter>

@@ -13,7 +13,7 @@ class TicketsController < ApplicationController
 
   def pending
     @jobs  = Delayed::Job.find_each.map do |d|
-      d.run_at
+      { run_at: d.run_at, failed_at: d.failed_at }.as_json
     end
   end
 

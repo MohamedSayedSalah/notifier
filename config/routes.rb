@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     get "logout", to: "users/sessions#destroy"
     get "reset", to: "devise/passwords#new"
     get "unlock", to: "devise/unlocks#new"
-
     get "profiles/:id", to: "users/profiles#show", as: :profile
     patch "profiles/:id", to: "users/profiles#update", as: :update_profile
   end

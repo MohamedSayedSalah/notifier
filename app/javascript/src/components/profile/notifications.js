@@ -11,7 +11,7 @@ export const Notifications = ({user: {messages: notifications, time_zone: timezo
                 <th className="p-4 w-1/4">Notification Type</th>
                 <th className="p-4 w-1/4">Trigger Time</th>
                 <th className="p-4 w-1/4">Notification Description</th>
-                <th className="p-4 w-1/4">Processed</th>
+                <th className="p-4 w-1/4">Received  Notification</th>
             </tr>
             </thead>
 
@@ -26,8 +26,6 @@ export const Notifications = ({user: {messages: notifications, time_zone: timezo
                     <td className="p-4 w-1/4">{notification.processed ? 'YES' : 'False'}</td>
                 </tr>
             })}
-
-
 
             </tbody>
         </table>

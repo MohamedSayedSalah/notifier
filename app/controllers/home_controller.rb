@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     @users = User.find_each.map do |u|
       UserBlueprint.render_as_hash(u, view: :profile)
     end
-    @tickets = Ticket.find_each.map do |t|
+    @tickets = Ticket.find_each.sort_by(&:created_at).reverse.map do |t|
       TicketBlueprint.render_as_hash(t, view: :ticket)
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_053625) do
+ActiveRecord::Schema.define(version: 2022_01_24_033238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 2022_01_23_053625) do
   create_table "messages", force: :cascade do |t|
     t.string "message_type", limit: 255
     t.bigint "user_id", null: false
-    t.boolean "processed"
+    t.boolean "processed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "messageable_type"
     t.bigint "messageable_id"
+    t.integer "delayed_job_id"
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end

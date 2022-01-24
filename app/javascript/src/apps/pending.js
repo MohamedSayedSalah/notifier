@@ -10,14 +10,13 @@ export const Pending = (props) => {
                     className="text-left w-full border-collapse">
                     <thead>
                     <tr>
-                        <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Jobs</th>
+                        <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Run at</th>
                     </tr>
                     </thead>
                     <tbody>
                     {props.jobs.map((j, i)=>{
                         return <tr className="hover:bg-grey-lighter" key={j + i}>
-                            <td className="py-4 px-6 border-b border-grey-light">{toYourTimeZone(j, props.time_zone)}</td>
-
+                            <td className="py-4 px-6 border-b border-grey-light">{toYourTimeZone(j.run_at, props.time_zone)}</td>
                         </tr>
                     })}
                     </tbody>
