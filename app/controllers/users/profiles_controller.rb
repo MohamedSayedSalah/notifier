@@ -4,7 +4,6 @@ class Users::ProfilesController < ApplicationController
   def show;end
 
   def update
-    params[:page] ||= "profile"
     current_user.attributes = profile_params
     if current_user.valid?
       current_user.save

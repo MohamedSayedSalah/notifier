@@ -2,7 +2,7 @@ import React from 'react'
 import {toYourTimeZone} from "../helpers/utils";
 
 
-export const Tickets = ({tickets, currentUser}) => {
+export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicket}) => {
 
     return <div>
         {tickets.map((ticket) => {
@@ -31,6 +31,11 @@ export const Tickets = ({tickets, currentUser}) => {
                     </div>
 
                     <button
+                        onClick={()=>{
+                            setOpen(!open)
+                            setTicket(ticket)
+                            setTitle('Edit')
+                        }}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 m-2 focus:outline-none rounded">edit
                     </button>
                 </div>

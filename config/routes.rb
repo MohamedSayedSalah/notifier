@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   post "/ticket", to: "tickets#create", as: :new_ticket
+  patch "/ticket/:id", to: "tickets#update", as: :update_ticket
   get "/pending", to: "tickets#pending", as: :pending
 
   root "home#index"
