@@ -28,7 +28,8 @@ class TicketMailer < ApplicationMailer
     raise 'Must be implemented by subclass'
   end
 
-  def template_variables_for(message, recipient)
+  ## evey email template has it is own template attributes
+  def prepare_email_data(message)
     raise 'Must be implemented by subclass'
   end
 

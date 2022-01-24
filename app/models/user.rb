@@ -15,12 +15,13 @@ class User < ApplicationRecord
     messages.processed.count
   end
 
+  def want_mail?
+    due_date_reminder
+  end
+
   def update_delayed_job
     begin
-      p "---"
-      p messages.not_processed.count
       messages.not_processed.each do |message|
-        p get_datetime(message.messageable.due_date, due_date_reminder_interval, due_date_reminder_time)
         Delayed::Job.find(message.delayed_job_id).update run_at: get_datetime(message.messageable.due_date, due_date_reminder_interval, due_date_reminder_time)
       end
     end

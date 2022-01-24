@@ -5,6 +5,7 @@ module Delayed
       callbacks do |lifecycle|
         lifecycle.after(:enqueue) do |job|
           p "job has been enqueue"
+          p job.id
           Message.last.update delayed_job_id:   job.id
           # do something here
         end

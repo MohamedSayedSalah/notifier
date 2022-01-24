@@ -14,19 +14,26 @@ class Message < ApplicationRecord
 
   def handle_message
     mark_as_processed!
-    begin
-      case message_type
-      when 'new_ticket' then
-        TicketMailer::Created.announce(self).deliver_now
-      when 'updated_ticket' then
-        TicketMailer::Updated.announce(self).deliver_now
+    if send_mail?
+      puts "send_mail"
+      begin
+        case message_type
+        when 'new_ticket' then
+          TicketMailer::Created.announce(self).deliver_now
+        when 'updated_ticket' then
+          TicketMailer::Updated.announce(self).deliver_now
+        end
+      rescue StandardError => e
+        save!(processed: false)
+        Rails.logger.info("cant deliver message  #{e.inspect}")
       end
-    rescue StandardError => e
-      save!(processed: false)
-      Rails.logger.info("cant deliver message  #{e.inspect}")
     end
   end
 
+
+  def send_mail?
+    user.want_mail?
+  end
 
   def mark_as_processed!
     self.update_attribute(:processed, true)
@@ -35,6 +42,7 @@ class Message < ApplicationRecord
   def mark_as_not_processed!
     self.update_attribute(:processed, false)
   end
+
 
   def process
       mark_as_not_processed!

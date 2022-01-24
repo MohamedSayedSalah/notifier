@@ -6,7 +6,7 @@ class TicketMailer::Created < TicketMailer
     'A new Ticket has been created!'
   end
 
-  def prepare_email_data
+  def prepare_email_data(message)
     @username = @user.username
     @ticket_title = @ticket.title
   end
