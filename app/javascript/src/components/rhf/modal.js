@@ -4,7 +4,7 @@ import {Select, DatePicker} from '@components/rhf'
 import {useForm} from "react-hook-form";
 import {axios} from '@helpers/axios'
 
-export const Modal = ({open, setOpen, users, submissionUrl, addTicket, updateTicket,  title, ticket}) => {
+export const Modal = ({open, setOpen, users, submissionUrl, addTicket, updateTicket,  title, ticket, currentUser}) => {
     const formRef = useRef(null)
     const [selected, setSelected] = useState(null)
     const [dueDate, setDueDate] = useState(new Date())
@@ -133,6 +133,11 @@ export const Modal = ({open, setOpen, users, submissionUrl, addTicket, updateTic
                         </button>
                     </div>
 
+                    <input  name="ticket[owner_id]"
+                           {...register("ticket[owner_id]")}
+                           hidden
+                            value={currentUser.id}
+                           />
 
                 </ForumContainer>
 

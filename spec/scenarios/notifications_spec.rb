@@ -1,7 +1,8 @@
 require 'rails_helper'
 describe User, "basic methods and attributes" do
-  let(:user) { create :user }
 
+  # let(:owner) { create :user, email: "owner@mail.com" }
+  let(:user) { create :user}
   before(:each) do
     Delayed::Worker.delay_jobs = true
   end
@@ -9,7 +10,9 @@ describe User, "basic methods and attributes" do
   describe "notifications" do
 
     it "should create message object adter creating ticket" do
-      ticket = create(:ticket, user: user)
+      # user = User.create(username: '1', email: 'user1@email.com' , time_zone: 'Africa/Cairo', password: '*******')
+      # puts user.valid?
+      ticket = create(:ticket, user: user, owner: user)
       expect(Message.last.messageable.id).to eq ticket.id
     end
 

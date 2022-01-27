@@ -23,7 +23,6 @@ export const Login = ({loginUrl, profileUrl, rememberable}) => {
             .then((res) => {
                 setSubmitting(false)
                 window.location.href = profileUrl
-
             })
             .catch((err) => {
                 setSubmitting(false)

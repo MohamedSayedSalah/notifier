@@ -36,6 +36,7 @@ export const Home = (props) => {
                     <div className={'w-full'}>
                         {open && <Modal title={title} open={open} setOpen={setOpen} users={props.users}
                                         submissionUrl={props.submissionUrl}
+                                        currentUser={props.currentUser}
                                         addTicket={addTicket} ticket={ticket} updateTicket={updateTicket}
                         />}
                     </div>

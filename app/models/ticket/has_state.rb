@@ -7,8 +7,10 @@ module Ticket::HasState
     include AASM
 
     aasm column: "state" do
-      state :opened, initial: true, after_enter: -> { handle_notification(["new_ticket"])}
-      state :in_progress, :done, :canceled
+      state :opened, initial: true, after_enter: -> { handle_notification(["new_ticket"], receiver: self.user)} #assignee
+      state :in_progress, after_enter: -> { handle_notification(["ticket_in_progress"], receiver: self.owner)}
+      state  :done, after_enter: -> { handle_notification(["ticket_done"], receiver: self.owner)}
+      state  :canceled
 
       event :next_state do
         transitions from: :opened, to: :in_progress
@@ -20,7 +22,6 @@ module Ticket::HasState
       end
 
     end
-
   end
 
 end

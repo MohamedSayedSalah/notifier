@@ -2,6 +2,7 @@ import React from 'react'
 import "./tickets.custom.scss"
 import {toYourTimeZone} from "../helpers/utils";
 import {BsCalendarEvent, BsFillPersonFill, BsClockFill} from "react-icons/bs";
+import { FcManager } from "react-icons/fc";
 import {axios} from '@helpers/axios'
 
 export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicket, updateTicket}) => {
@@ -60,11 +61,17 @@ export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicke
                                 </div>
                                 <div className="flex-col   text-sm text-gray-500">
                                     <div className="flex-1 inline-flex items-center">
-                                        <span className={"mr-2"}><BsFillPersonFill/></span>
-                                        <p className="">{ticket.username}</p>
+                                        <span className={"mr-2"}><FcManager/></span>
+                                        <p className="">{ticket.owner}</p>
                                     </div>
                                 </div>
 
+                                <div className="flex-col   text-sm text-gray-500">
+                                    <div className="flex-1 inline-flex items-center">
+                                        <span className={"mr-2"}><BsFillPersonFill/></span>
+                                        <p className="">{ticket.assignee}</p>
+                                    </div>
+                                </div>
 
                                 <div className="flex-col   text-sm text-gray-500">
                                     <div className="flex-1 inline-flex items-center">
@@ -73,7 +80,7 @@ export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicke
                                              fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
                                         <p className="">{ticket.due_date}</p>
                                     </div>
@@ -82,18 +89,18 @@ export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicke
                                 <div className="flex p-4 pb-2 border-t border-gray-200 "/>
 
                                 <div className="flex space-x-3 text-sm font-medium">
-                                    <div className="flex-auto flex space-x-3">
+                                    { ticket.assignee === currentUser.username &&   <div className="flex-auto flex space-x-3">
                                         <button
                                             disabled={ticket.state === 'done'}
-                                            onClick={()=>handleState(ticket.id)}
+                                            onClick={() => handleState(ticket.id)}
                                             className="disabled:bg-gray-300 mb-2 md:mb-0 bg-white  px-4 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2 ">
                                     <span className={`${iconColor(ticket)} rounded-lg`}>
                                         <BsClockFill size={20}/>
                                     </span>
                                             <span>{mapState(ticket.state)}</span>
                                         </button>
-                                    </div>
-                                    <button
+                                    </div>}
+                                    {currentUser.username === ticket.owner && <button
                                         onClick={() => {
                                             setOpen(!open)
                                             setTicket(ticket)
@@ -101,7 +108,7 @@ export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicke
                                         }}
                                         className="mb-2 md:mb-0 bg-gray-900 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-gray-800"
                                         type="button" aria-label="like">Edit
-                                    </button>
+                                    </button>}
                                 </div>
                             </div>
                         </div>

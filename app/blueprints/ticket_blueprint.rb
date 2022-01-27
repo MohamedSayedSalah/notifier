@@ -10,8 +10,11 @@ class TicketBlueprint < Blueprinter::Base
 
   view :ticket do
     fields  :id, :title ,  :description, :due_date, :state, :created_at
-    field :username do |ticket, options|
+    field :assignee do |ticket, options|
          ticket.user.username
+    end
+    field :owner do |ticket, options|
+      ticket.owner.username
     end
   end
 

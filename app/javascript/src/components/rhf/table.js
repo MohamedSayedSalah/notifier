@@ -16,7 +16,7 @@ export const Table = ({headers, rows}) => {
                     {rows.map((row) => {
                         return <tr className="text-gray-700">
                             {row.map((c) => {
-                                if (c.constructor.name === 'String') {
+                                if (c?.constructor.name === 'String') {
                                     return < td className="px-4 py-3 text-sm border">{c}</td>
                                 } else {
                                     return <td className="px-4 py-3 text-xs border">

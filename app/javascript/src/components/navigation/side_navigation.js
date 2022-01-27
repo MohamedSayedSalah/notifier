@@ -31,7 +31,7 @@ export const SideNavigation = ({currentUser,
                     className="h-10 w-10 relative  flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
                     <BsBellFill size={20}/>
                     <span
-                        className="absolute right-0 top-0 -mt-2 text-xs bg-red-500 text-white font-medium px-2 shadow-lg rounded-full border-2 border-white">3</span>
+                        className="absolute right-0 top-0 -mt-2 text-xs bg-red-500 text-white font-medium px-2 shadow-lg rounded-full border-2 border-white">{currentUser.notifications_count}</span>
                 </a>
             </div>
             <div className={"py-14"}>

@@ -11,7 +11,7 @@ import {axios} from '@helpers/axios'
 import {time_zones} from '@helpers/time_zones'
 
 
-export const PersonalInfo = ({user, submissionUrl}) => {
+export const PersonalInfo = ({user}) => {
 
 
     const [reminder, setReminder] = useState(user?.due_date_reminder)
@@ -30,7 +30,7 @@ export const PersonalInfo = ({user, submissionUrl}) => {
     const onSubmit = (data) => {
         data.user.due_date_reminder = reminder
         data.user.due_date_reminder_time = time
-        axios.patch(submissionUrl, {...data, page: 'personal_info'})
+        axios.patch('profiles/'+user.id, {...data, page: 'personal_info'})
             .then((res) => {
 
             }).catch((e) => {

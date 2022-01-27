@@ -7,7 +7,7 @@ class Users::ProfilesController < ApplicationController
     current_user.attributes = profile_params
     if current_user.valid?
       current_user.save
-      render json: { ok: "ok", profileURL: profile_path(current_user), user: UserBlueprint.render_as_hash(current_user, view: :profile) }
+      render json: { ok: "ok", profileURL: profile_path, user: UserBlueprint.render_as_hash(current_user, view: :profile) }
     else
       render json: { errors: current_user.errors }
     end

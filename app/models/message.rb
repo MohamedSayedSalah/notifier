@@ -9,18 +9,24 @@ class Message < ApplicationRecord
   scope :not_processed, -> { where(processed: false) }
   after_create :process, unless: -> { self.processed }
 
-  MessageTypes = [{ :mail => [:new_ticket, :updated_ticket] }]
+  MessageTypes = [{ :mail => [:new_ticket,
+                              :updated_ticket,
+                              :ticket_in_progress,
+                              :ticket_done
+  ] }]
 
   def handle_message
     if send_mail?
-
       mark_as_processed!
-
       begin
         case message_type
         when 'new_ticket' then
           TicketMailer::Created.announce(self).deliver_now
         when 'updated_ticket' then
+          TicketMailer::Updated.announce(self).deliver_now
+        when 'ticket_in_progress' then
+          TicketMailer::Updated.announce(self).deliver_now
+        when 'ticket_done' then
           TicketMailer::Updated.announce(self).deliver_now
         end
       rescue StandardError => e

@@ -7,7 +7,10 @@ export const Notifications = ({user}) => {
     const map = (key)=>{
         let hash =
             {new_ticket: 'New Ticket',
-            updated_ticket: 'Updated Ticket'}
+            updated_ticket: 'Updated Ticket',
+                ticket_in_progress: 'Ticket In Progress',
+                ticket_done: 'Ticket done'
+            }
         return hash[key]
     }
 
@@ -17,7 +20,6 @@ export const Notifications = ({user}) => {
        return user.messages.map((row) => {
             return [map(row.trigger),
                 toYourTimeZone(row.trigger_time, user.time_zone),
-                row.description,
                 row.processed
             ]
         })
@@ -26,7 +28,6 @@ export const Notifications = ({user}) => {
 
         <Table headers={['Notification Type',
             'Trigger Time',
-            'Notification Description',
             'Processed'
         ]}
                rows={rows()}
