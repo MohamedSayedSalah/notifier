@@ -12,9 +12,11 @@ Rails.application.routes.draw do
     get "logout", to: "users/sessions#destroy"
     get "reset", to: "devise/passwords#new"
     get "unlock", to: "devise/unlocks#new"
-    get "profiles/:id", to: "users/profiles#show", as: :profile
-    patch "profiles/:id", to: "users/profiles#update", as: :update_profile
   end
+
+  get "/settings", to: "users/profiles#show", as: :profile
+  patch "profiles/:id", to: "users/profiles#update", as: :update_profile
+  get "/notifications", to: "users/profiles#notifications", as: :notifications
 
   post "/ticket", to: "tickets#create", as: :new_ticket
   patch "/ticket/:id", to: "tickets#update", as: :update_ticket

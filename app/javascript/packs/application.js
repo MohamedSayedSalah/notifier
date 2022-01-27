@@ -7,10 +7,11 @@ import "@stylesheets/application.css"
 import mount from '@src/mount'
 import "channels"
 
-import { Footer } from '@components/navigation/footer'
-import { Home } from "@apps/home.js"
-import { Pending } from "@apps/pending.js"
+import { SideNavigation } from '@components/navigation/side_navigation'
+import { Home } from "@apps/home"
+import { Pending } from "@apps/pending"
 import { MainNavigation } from '@components/navigation/main_navigation'
+import {Notifications} from "@components/profile";
 import SignUpLogin from '@apps/signup_login'
 import ProfileSettings from "@apps/profile_settings";
 
@@ -23,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
         SignUpLogin,
         ProfileSettings,
         MainNavigation,
-        // BikesParent,
         Pending,
         Home,
-        Footer
+        SideNavigation,
+        Notifications
     })
 })// Support component names relative to this directory:

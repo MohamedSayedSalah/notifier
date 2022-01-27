@@ -14,6 +14,9 @@ class Users::ProfilesController < ApplicationController
   end
 
 
+  def notifications;end
+
+
   private
 
   def profile_params

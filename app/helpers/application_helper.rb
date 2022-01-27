@@ -2,7 +2,8 @@ module ApplicationHelper
   def main_navigation_props
     if current_user.present?
       { currentUser: UserBlueprint.render_as_hash(current_user, view: :profile),
-        profile_path: profile_path(current_user.id)
+        profile_path: profile_path,
+        notification_path: notifications_path
       }
     else
       { currentUser: nil, profilePath: nil, loginPath: login_path }

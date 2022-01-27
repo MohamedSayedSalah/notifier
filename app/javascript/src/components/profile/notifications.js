@@ -1,33 +1,35 @@
 import React from 'react'
 import {toYourTimeZone} from "../../helpers/utils";
+import {Table} from "../rhf";
 
-export const Notifications = ({user: {messages: notifications, time_zone: timezone}})=>{
-    return <div className="container relative">
+export const Notifications = ({user}) => {
+
+    const map = (key)=>{
+        let hash =
+            {new_ticket: 'New Ticket',
+            updated_ticket: 'Updated Ticket'}
+        return hash[key]
+    }
 
 
-        <table className="text-left w-2/3 absolute left-1/4 top-14">
-            <thead className="bg-black flex text-white w-full">
-            <tr className="flex w-full mb-4">
-                <th className="p-4 w-1/4">Notification Type</th>
-                <th className="p-4 w-1/4">Trigger Time</th>
-                <th className="p-4 w-1/4">Notification Description</th>
-                <th className="p-4 w-1/4">Processed</th>
-            </tr>
-            </thead>
 
-            <tbody className="bg-white flex flex-col items-center justify-between overflow-y-scroll w-full"
-                   // style={{height: '50vh'}}
-            >
-            {notifications.map((notification, i)=>{
-                return <tr className="flex w-full mb-4" key={i + 'notifications'}>
-                    <td className="p-4 w-1/4">{notification.type+'['+notification.trigger +']'}</td>
-                    <td className="p-4 w-1/4">{toYourTimeZone(notification.trigger_time, timezone)}</td>
-                    <td className="p-4 w-1/4">{notification.description}</td>
-                    <td className="p-4 w-1/4">{notification.processed ? 'YES' : 'False'}</td>
-                </tr>
-            })}
+    const rows = () => {
+       return user.messages.map((row) => {
+            return [map(row.trigger),
+                toYourTimeZone(row.trigger_time, user.time_zone),
+                row.description,
+                row.processed
+            ]
+        })
+    }
+    return <div className="container relative my-14 overflow-hidden mb-8  w-3/4 min-h-screen overflow-scroll">
 
-            </tbody>
-        </table>
+        <Table headers={['Notification Type',
+            'Trigger Time',
+            'Notification Description',
+            'Processed'
+        ]}
+               rows={rows()}
+        />
     </div>
 }

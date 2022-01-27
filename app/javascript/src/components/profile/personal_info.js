@@ -13,6 +13,7 @@ import {time_zones} from '@helpers/time_zones'
 
 export const PersonalInfo = ({user, submissionUrl}) => {
 
+
     const [reminder, setReminder] = useState(user?.due_date_reminder)
     const [time, setTime] = useState(user?.due_date_reminder_time)
 
@@ -45,7 +46,7 @@ export const PersonalInfo = ({user, submissionUrl}) => {
             onSubmit={handleSubmit(onSubmit)}
         >
 
-            <div className="bg-white w-1/2 left-1/4 top-16 absolute shadow-xl rounded p-10">
+            <div className="bg-white shadow-xl rounded p-10">
 
                 <div className="">
                     <label htmlFor="names" className="text-md text-gray-600">User name</label>

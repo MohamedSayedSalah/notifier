@@ -7,6 +7,7 @@ import {SubmitButtons} from "./submit_buttons";
 import {TimePicker} from "./time_picker";
 import {Modal} from "./modal";
 import {DatePicker} from "./date_picker";
+import {Table} from "./table"
 
 export {
     Input,
@@ -17,5 +18,6 @@ export {
     SubmitButtons,
     TimePicker,
     Modal,
-    DatePicker
+    DatePicker,
+    Table
 }
