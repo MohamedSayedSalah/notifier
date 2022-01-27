@@ -9,7 +9,7 @@ class TicketBlueprint < Blueprinter::Base
   # end
 
   view :ticket do
-    fields  :id, :title ,  :description, :due_date, :progress, :created_at
+    fields  :id, :title ,  :description, :due_date, :state, :created_at
     field :username do |ticket, options|
          ticket.user.username
     end

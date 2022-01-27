@@ -17,6 +17,13 @@ class TicketsController < ApplicationController
     end
   end
 
+  def handle_state
+    ticket = Ticket.find(params[:id])
+    ticket.next_state
+    ticket.save!
+    render json: { ok: "ok",  ticket: TicketBlueprint.render_as_hash(ticket, view: :ticket) }
+  end
+
   def update
     ticket = Ticket.find(params[:id])
     ticket.attributes = ticket_params
@@ -30,7 +37,7 @@ class TicketsController < ApplicationController
 
   private
   def ticket_params
-    params.require(:ticket).permit(:title, :description, :user_id, :due_date)
+    params.require(:ticket).permit(:title, :description, :user_id, :due_date, :start)
   end
 
 end

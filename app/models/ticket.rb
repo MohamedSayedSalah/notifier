@@ -1,18 +1,11 @@
 class Ticket < ApplicationRecord
+
+  include Ticket::HasState
+
   belongs_to :user
   has_many :messages
+  after_commit ->(obj) { obj.handle_notification(["updated_ticket"]) }, on: :update
 
-  after_save :created_ticket
-  after_commit ->(obj) { obj.updated_ticket }, on: :update
-
-
-  def created_ticket
-    handle_notification ["new_ticket"]
-  end
-
-  def updated_ticket
-    handle_notification ["updated_ticket"]
-  end
 
   def handle_notification messages_type
     messages_type.each do |message_type|

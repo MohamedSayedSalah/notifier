@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   post "/ticket", to: "tickets#create", as: :new_ticket
   patch "/ticket/:id", to: "tickets#update", as: :update_ticket
+  patch "/ticket/:id/handle_state", to: "tickets#handle_state"
   get "/pending", to: "tickets#pending", as: :pending
 
   root "home#index"

@@ -3,7 +3,7 @@ import {
     Modal
 } from '@components/rhf'
 import {Tickets} from "@components/tickets";
-
+import { BsPlusCircleFill } from "react-icons/bs";
 
 export const Home = (props) => {
     const [open, setOpen] = useState(false)
@@ -22,10 +22,16 @@ export const Home = (props) => {
     }
 
     return <div className="mt-14">
+
+        <div className={"absolute cursor-pointer left-5 top-10 text-white z-20"}
+          onClick={()=> setOpen(!open )}
+        >
+            <BsPlusCircleFill size={30}/>
+        </div>
         <div className="w-full h-full flex flex-col justify-between">
             <main className="max-w-full h-full flex relative overflow-y-hidden">
                 <div
-                    className="h-full w-full m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-scroll">
+                    className="h-full min-h-screen w-full m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-scroll">
 
                     <div className={'w-full'}>
                         {open && <Modal title={title} open={open} setOpen={setOpen} users={props.users}
@@ -35,6 +41,7 @@ export const Home = (props) => {
                     </div>
                     <Tickets tickets={tickets} setTickets={setTickets} currentUser={props.currentUser}
                              setOpen={setOpen} open={open} setTitle={setTitle} setTicket={setTicket}
+                             updateTicket={updateTicket}
                     />
 
                 </div>

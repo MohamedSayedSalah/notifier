@@ -2,13 +2,44 @@ import React from 'react'
 import "./tickets.custom.scss"
 import {toYourTimeZone} from "../helpers/utils";
 import {BsCalendarEvent, BsFillPersonFill, BsClockFill} from "react-icons/bs";
-// BsCalendarEvent
+import {axios} from '@helpers/axios'
 
-export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicket}) => {
+export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicket, updateTicket}) => {
+
+    const handleState = (id)=>{
+        axios.patch("/ticket/"+id+"/handle_state").then((res)=>{
+            updateTicket(res.data.ticket)
+        }).catch((e)=>{
+            alert(e)
+        }).finally(()=>{
+
+        })
+    }
+
+
+    const mapState = (key) =>{
+         let hash ={'opened': 'Start',
+         'in_progress': 'In Progress',
+          'done': 'Complete'
+         }
+         return hash[key]
+    }
+
+    const iconColor = (ticket)=>{
+        switch (ticket.state){
+            case 'opened':
+                return "text-grey-400 hover:text-grey-500"
+            case 'in_progress':
+                return "text-yellow-400 hover:text-yellow-500"
+            case 'done':
+                return "text-green-400 hover:text-green-500"
+        }
+
+    }
 
     return <>
         {tickets.map((ticket) => {
-            return <div key={ticket.id + 'ticket'} className="w-96 h-72 min-h-max rounded-lg flex-shrink-0 flex-grow ">
+            return <div key={ticket.id + 'ticket'}  className="w-96  rounded-lg flex-shrink-0 flex-grow ">
 
                 <div className="flex flex-col">
                     <div className="bg-white shadow-md  rounded-3xl p-4">
@@ -53,11 +84,13 @@ export const Tickets = ({tickets, currentUser, setOpen, open, setTitle, setTicke
                                 <div className="flex space-x-3 text-sm font-medium">
                                     <div className="flex-auto flex space-x-3">
                                         <button
-                                            className="mb-2 md:mb-0 bg-white px-4 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2 ">
-                                    <span className="text-green-400 hover:text-green-500 rounded-lg">
+                                            disabled={ticket.state === 'done'}
+                                            onClick={()=>handleState(ticket.id)}
+                                            className="disabled:bg-gray-300 mb-2 md:mb-0 bg-white  px-4 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2 ">
+                                    <span className={`${iconColor(ticket)} rounded-lg`}>
                                         <BsClockFill size={20}/>
                                     </span>
-                                            <span>start</span>
+                                            <span>{mapState(ticket.state)}</span>
                                         </button>
                                     </div>
                                     <button
